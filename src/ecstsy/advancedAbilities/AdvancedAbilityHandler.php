@@ -1,13 +1,16 @@
 <?php
 
-namespace ecstsy\advancedAbilities;
+namespace ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities;
 
-use ecstsy\advancedAbilities\conditions\IsSneakingCondition;
-use ecstsy\advancedAbilities\conditions\VictimHealthCondition;
-use ecstsy\advancedAbilities\triggers\AttackTrigger;
-use ecstsy\advancedAbilities\utils\registries\ConditionRegistry;
-use ecstsy\advancedAbilities\utils\registries\EffectRegistry;
-use ecstsy\advancedAbilities\utils\registries\TriggerRegistry;
+use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\conditions\IsHoldingCondition;
+use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\conditions\IsSneakingCondition;
+use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\effects\AddPotionEffect;
+use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\effects\StealHealthEffect;
+use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\triggers\AttackTrigger;
+use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\triggers\DefenseTrigger;
+use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\registries\ConditionRegistry;
+use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\registries\EffectRegistry;
+use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\registries\TriggerRegistry;
 use InvalidArgumentException;
 use pocketmine\plugin\Plugin;
 
@@ -22,15 +25,18 @@ final class AdvancedAbilityHandler {
 
         $triggers = [
             "ATTACK" => new AttackTrigger(),
+            "DEFENSE" => new DefenseTrigger(),
         ];
 
         $conditions = [
             //"VICTIM_HEALTH" => new VictimHealthCondition(),
             "IS_SNEAKING" => new IsSneakingCondition(),
+            "IS_HOLDING" => new IsHoldingCondition(),
         ];
 
         $effects = [
-
+            'STEAL_HEALTH' => new StealHealthEffect(),
+            'ADD_POTION' => new AddPotionEffect(),
         ];
 
         foreach ($triggers as $trigger => $handler) {
@@ -39,7 +45,6 @@ final class AdvancedAbilityHandler {
 
         foreach ($conditions as $condition => $handler) {
             ConditionRegistry::register($condition, $handler);
-            error_log("Registered condition: $condition");
         }
 
         foreach ($effects as $effect => $handler) {
