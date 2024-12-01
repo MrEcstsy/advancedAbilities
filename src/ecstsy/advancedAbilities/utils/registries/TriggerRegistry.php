@@ -1,8 +1,8 @@
 <?php
 
-namespace ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\registries;
+namespace ecstsy\advancedAbilities\utils\registries;
 
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\TriggerInterface;
+use ecstsy\advancedAbilities\utils\TriggerInterface;
 use InvalidArgumentException;
 
 class TriggerRegistry {
