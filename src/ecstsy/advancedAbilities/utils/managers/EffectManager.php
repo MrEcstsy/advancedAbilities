@@ -2,8 +2,8 @@
 
 namespace ecstsy\advancedAbilities\utils\managers;
 
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\effects\AddPotionEffect;
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\effects\StealHealthEffect;
+use ecstsy\advancedAbilities\effects\AddPotionEffect;
+use ecstsy\advancedAbilities\effects\StealHealthEffect;
 
 class EffectManager {
 
