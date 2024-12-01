@@ -1,6 +1,6 @@
 <?php
 
-namespace ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\managers;
+namespace ecstsy\advancedAbilities\utils\managers;
 
 use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\effects\AddPotionEffect;
 use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\effects\StealHealthEffect;
