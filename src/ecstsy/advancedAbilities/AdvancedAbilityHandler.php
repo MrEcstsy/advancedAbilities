@@ -1,12 +1,13 @@
 <?php
 
-namespace ecstsy\advancedAbilities;
+namespace ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities;
 
-use ecstsy\advancedAbilities\conditions\VictimHealthCondition;
-use ecstsy\advancedAbilities\triggers\AttackTrigger;
-use ecstsy\advancedAbilities\triggers\registries\TriggerRegistery;
-use ecstsy\advancedAbilities\utils\registries\ConditionRegistry;
-use ecstsy\advancedAbilities\utils\registries\EffectRegistry;
+use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\conditions\IsSneakingCondition;
+use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\conditions\VictimHealthCondition;
+use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\triggers\AttackTrigger;
+use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\registries\ConditionRegistry;
+use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\registries\EffectRegistry;
+use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\registries\TriggerRegistry;
 use InvalidArgumentException;
 use pocketmine\plugin\Plugin;
 
@@ -24,7 +25,8 @@ final class AdvancedAbilityHandler {
         ];
 
         $conditions = [
-            "VICTIM_HEALTH" => new VictimHealthCondition(),
+            //"VICTIM_HEALTH" => new VictimHealthCondition(),
+            "IS_SNEAKING" => new IsSneakingCondition(),
         ];
 
         $effects = [
@@ -32,11 +34,12 @@ final class AdvancedAbilityHandler {
         ];
 
         foreach ($triggers as $trigger => $handler) {
-            TriggerRegistery::register($trigger, $handler);
+            TriggerRegistry::register($trigger, $handler);
         }
 
         foreach ($conditions as $condition => $handler) {
             ConditionRegistry::register($condition, $handler);
+            error_log("Registered condition: $condition");
         }
 
         foreach ($effects as $effect => $handler) {
