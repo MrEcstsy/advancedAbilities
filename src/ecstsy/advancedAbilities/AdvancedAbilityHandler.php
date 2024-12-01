@@ -2,7 +2,7 @@
 
 namespace ecstsy\advancedAbilities;
 
-use advancedAbilities\conditions\IsHoldingCondition;
+use ecstsy\advancedAbilities\conditions\IsHoldingCondition;
 use ecstsy\advancedAbilities\conditions\IsSneakingCondition;
 use ecstsy\advancedAbilities\effects\AddPotionEffect;
 use ecstsy\advancedAbilities\effects\StealHealthEffect;
