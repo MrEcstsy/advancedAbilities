@@ -1,6 +1,6 @@
 <?php
 
-namespace \ecstsy\advancedAbilities\effects;
+namespace ecstsy\advancedAbilities\effects;
 
 use ecstsy\advancedAbilities\utils\EffectInterface;
 use ecstsy\advancedAbilities\utils\Utils;
