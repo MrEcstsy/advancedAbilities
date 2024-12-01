@@ -13,7 +13,7 @@ class AttackTrigger implements TriggerInterface {
     public function execute(Entity $attacker, ?Entity $victim, array $enchantments, string $context, array $extraData = []): void
     {
         foreach ($enchantments as $index => $enchantment) {
-            $level = $extraData[$index] ?? null;
+            $level = $extraData['enchant-level'] ?? null;
             if ($level === null) {
                 continue; 
             }
@@ -108,4 +108,5 @@ class AttackTrigger implements TriggerInterface {
             }
         }
     }
+    
 }
