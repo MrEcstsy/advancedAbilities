@@ -1,16 +1,16 @@
 <?php
 
-namespace ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities;
+namespace ecstsy\advancedAbilities;
 
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\conditions\IsHoldingCondition;
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\conditions\IsSneakingCondition;
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\effects\AddPotionEffect;
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\effects\StealHealthEffect;
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\triggers\AttackTrigger;
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\triggers\DefenseTrigger;
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\registries\ConditionRegistry;
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\registries\EffectRegistry;
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\registries\TriggerRegistry;
+use advancedAbilities\conditions\IsHoldingCondition;
+use ecstsy\advancedAbilities\conditions\IsSneakingCondition;
+use ecstsy\advancedAbilities\effects\AddPotionEffect;
+use ecstsy\advancedAbilities\effects\StealHealthEffect;
+use ecstsy\advancedAbilities\triggers\AttackTrigger;
+use ecstsy\advancedAbilities\triggers\DefenseTrigger;
+use ecstsy\advancedAbilities\utils\registries\ConditionRegistry;
+use ecstsy\advancedAbilities\utils\registries\EffectRegistry;
+use ecstsy\advancedAbilities\utils\registries\TriggerRegistry;
 use InvalidArgumentException;
 use pocketmine\plugin\Plugin;
 
