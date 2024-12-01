@@ -1,11 +1,11 @@
 <?php
 
-namespace ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\triggers\registries;
+namespace ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\registries;
 
 use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\TriggerInterface;
 use InvalidArgumentException;
 
-class TriggerRegistery {
+class TriggerRegistry {
 
     private static array $triggers = [];
 
