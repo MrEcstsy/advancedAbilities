@@ -1,8 +1,8 @@
 <?php
 
-namespace ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\registries;
+namespace ecstsy\advancedAbilities\utils\registries;
 
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\EffectInterface;
+use ecstsy\advancedAbilities\utils\EffectInterface;
 
 class EffectRegistry {
     private static array $effects = [];
