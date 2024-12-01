@@ -1,6 +1,6 @@
 <?php
 
-namespace ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\managers;
+namespace ecstsy\advancedAbilities\utils\managers;
 
 use pocketmine\entity\Entity;
 
