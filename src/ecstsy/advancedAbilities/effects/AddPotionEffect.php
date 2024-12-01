@@ -1,8 +1,8 @@
 <?php
 
-namespace ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\effects;
+namespace ecstsy\advancedAbilities\effects;
 
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\EffectInterface;
+use ecstsy\advancedAbilities\utils\EffectInterface;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\StringToEffectParser;
 use pocketmine\entity\Entity;
