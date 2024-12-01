@@ -1,6 +1,6 @@
 <?php
 
-namespace ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\conditions;
+namespace ecstsy\advancedAbilities\conditions;
 
 use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\ConditionInterface;
 use pocketmine\entity\Entity;
