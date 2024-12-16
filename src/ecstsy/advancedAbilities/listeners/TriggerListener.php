@@ -1,12 +1,12 @@
 <?php
 
-namespace ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\listeners;
+namespace ecstsy\advancedAbilities\listeners;
 
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\AdvancedAbilityHandler;
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\triggers\DefenseTrigger;
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\triggers\GenericTrigger;
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\TriggerHelper;
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\Utils;
+use ecstsy\advancedAbilities\AdvancedAbilityHandler;
+use ecstsy\advancedAbilities\triggers\DefenseTrigger;
+use ecstsy\advancedAbilities\triggers\GenericTrigger;
+use ecstsy\advancedAbilities\utils\TriggerHelper;
+use ecstsy\advancedAbilities\utils\Utils;
 use pocketmine\entity\Living;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
