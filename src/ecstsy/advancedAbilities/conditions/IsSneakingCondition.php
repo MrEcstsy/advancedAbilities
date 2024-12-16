@@ -10,8 +10,15 @@ class IsSneakingCondition implements ConditionInterface {
 
     public function check(Entity $attacker, ?Entity $victim, array $conditionData, string $context, array $extraData): bool
     {
-        if ($attacker instanceof Player) {
-            return $attacker->isSneaking();  
+
+        $target = $conditionData['target'] === 'victim' ? $victim : $attacker;
+    
+        if (!$target instanceof Player) {
+            return false; 
+        }
+        
+        if ($target instanceof Player) {
+            return $target->isSneaking();  
         }
 
         return false;
