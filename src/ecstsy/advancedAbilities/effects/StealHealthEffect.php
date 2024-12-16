@@ -18,7 +18,7 @@ class StealHealthEffect implements EffectInterface {
         $target = $extraData['target'] === 'victim' ? $victim : $attacker;
     
         if (!$target instanceof Living) {
-            return false; 
+            return; 
         }
 
         if ($victim !== null && $victim instanceof Living) {
