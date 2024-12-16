@@ -12,7 +12,7 @@ class AddPotionEffect implements EffectInterface {
 
     public function apply(Entity $attacker, ?Entity $victim, array $data, array $effectData, string $context, array $extraData): void
     {
-        $target = $extraData['target'] === 'victim' ? $victim : $attacker;
+        $target = $effectData['target'] === 'victim' ? $victim : $attacker;
     
         if (!$target instanceof Living) {
             return; 
