@@ -15,14 +15,10 @@ class StealHealthEffect implements EffectInterface {
             return; 
         }
 
-        $targetEntity = match (strtolower($effectData['target'] ?? '')) {
-            'attacker' => $attacker,
-            'victim' => $victim,
-            default => null,
-        };
-
-        if ($targetEntity === null || !$targetEntity instanceof Living) {
-            return; 
+        $target = $extraData['target'] === 'victim' ? $victim : $attacker;
+    
+        if (!$target instanceof Living) {
+            return false; 
         }
 
         if ($victim !== null && $victim instanceof Living) {
@@ -33,9 +29,9 @@ class StealHealthEffect implements EffectInterface {
             $healthToSteal = 0; 
         }
 
-        $currentTargetHealth = $targetEntity->getHealth();
-        $maxTargetHealth = $targetEntity->getMaxHealth();
+        $currentTargetHealth = $target->getHealth();
+        $maxTargetHealth = $target->getMaxHealth();
         $newTargetHealth = min($maxTargetHealth, $currentTargetHealth + $healthToSteal); 
-        $targetEntity->setHealth($newTargetHealth);
+        $target->setHealth($newTargetHealth);
     }
 }
