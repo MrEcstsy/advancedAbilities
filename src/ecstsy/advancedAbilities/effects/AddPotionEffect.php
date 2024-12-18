@@ -12,9 +12,11 @@ class AddPotionEffect implements EffectInterface {
 
     public function apply(Entity $attacker, ?Entity $victim, array $data, array $effectData, string $context, array $extraData): void
     {
-        $target = $effectData['target'] === "attacker" ? $attacker : $victim;
-
-        if ($target === null) return;
+        $target = $effectData['target'] === 'victim' ? $victim : $attacker;
+    
+        if (!$target instanceof Living) {
+            return; 
+        }
 
         $potion = StringToEffectParser::getInstance()->parse($effectData['potion'] ?? '');
         

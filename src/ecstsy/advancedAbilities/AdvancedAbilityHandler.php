@@ -6,6 +6,7 @@ use ecstsy\advancedAbilities\conditions\IsHoldingCondition;
 use ecstsy\advancedAbilities\conditions\IsSneakingCondition;
 use ecstsy\advancedAbilities\effects\AddPotionEffect;
 use ecstsy\advancedAbilities\effects\StealHealthEffect;
+use ecstsy\advancedAbilities\listeners\TriggerListener;
 use ecstsy\advancedAbilities\triggers\AttackTrigger;
 use ecstsy\advancedAbilities\triggers\DefenseTrigger;
 use ecstsy\advancedAbilities\utils\registries\ConditionRegistry;
@@ -13,6 +14,7 @@ use ecstsy\advancedAbilities\utils\registries\EffectRegistry;
 use ecstsy\advancedAbilities\utils\registries\TriggerRegistry;
 use InvalidArgumentException;
 use pocketmine\plugin\Plugin;
+use pocketmine\Server;
 
 final class AdvancedAbilityHandler {
     
@@ -39,6 +41,10 @@ final class AdvancedAbilityHandler {
             'ADD_POTION' => new AddPotionEffect(),
         ];
 
+        $listeners = [
+            new TriggerListener($plugin)
+        ];
+
         foreach ($triggers as $trigger => $handler) {
             TriggerRegistry::register($trigger, $handler);
         }
@@ -49,6 +55,10 @@ final class AdvancedAbilityHandler {
 
         foreach ($effects as $effect => $handler) {
             EffectRegistry::register($effect, $handler);
+        }
+
+        foreach ($listeners as $listener) {
+            Server::getInstance()->getPluginManager()->registerEvents($listener, $plugin);
         }
     }
 
