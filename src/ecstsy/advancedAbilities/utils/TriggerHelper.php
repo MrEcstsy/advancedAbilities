@@ -19,7 +19,6 @@ trait TriggerHelper {
 
         $conditionType = $condition['type'] ?? '';
         $conditionMode = strtolower($condition['condition_mode'] ?? 'allow');
-
         $conditionHandler = ConditionRegistry::get($conditionType);
 
         if ($conditionHandler === null) {
@@ -89,7 +88,7 @@ trait TriggerHelper {
         foreach ($effects['effects'] as $effectConfig) {
             $effectType = strtolower($effectConfig['type'] ?? '');
             $effectClass = EffectManager::getEffectClass($effectType);
-    
+
             if ($effectClass && class_exists($effectClass)) {
                 if (!$forceMode && $effectChance > 0) {
                     $randomRoll = mt_rand(1, 100);
