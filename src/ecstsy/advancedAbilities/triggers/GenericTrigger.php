@@ -1,11 +1,11 @@
 <?php
 
-namespace ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\triggers;
+namespace ecstsy\advancedAbilities\triggers;
 
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\managers\CooldownManager;
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\registries\ConditionRegistry;
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\TriggerHelper;
-use ecstsy\AdvancedEnchantments\libs\ecstsy\advancedAbilities\utils\TriggerInterface;
+use ecstsy\advancedAbilities\utils\managers\CooldownManager;
+use ecstsy\advancedAbilities\utils\registries\ConditionRegistry;
+use ecstsy\advancedAbilities\utils\TriggerHelper;
+use ecstsy\advancedAbilities\utils\TriggerInterface;
 use pocketmine\entity\Entity;
 use pocketmine\player\Player;
 
