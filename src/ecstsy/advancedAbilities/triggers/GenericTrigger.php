@@ -3,6 +3,7 @@
 namespace ecstsy\advancedAbilities\triggers;
 
 use ecstsy\advancedAbilities\utils\managers\CooldownManager;
+use ecstsy\advancedAbilities\utils\managers\EnchantmentDisableManager;
 use ecstsy\advancedAbilities\utils\registries\ConditionRegistry;
 use ecstsy\advancedAbilities\utils\TriggerHelper;
 use ecstsy\advancedAbilities\utils\TriggerInterface;
@@ -33,7 +34,28 @@ class GenericTrigger implements TriggerInterface {
             $conditionsMet = true;
             $adjustedChance = $baseChance;
             $forceTriggered = false;
-    
+            $enchantmentId = $enchantmentData['id'] ?? 'unknown';
+
+            if ($attacker instanceof Player && EnchantmentDisableManager::isEnchantmentDisabled($enchantmentId, $attacker->getName())) {
+                $disabledUntil = EnchantmentDisableManager::getDisabledUntilTime($enchantmentId, $attacker->getName());
+                
+                if ($disabledUntil > time()) {
+                    continue;  
+                } else {
+                    EnchantmentDisableManager::removeDisableState($enchantmentId, $attacker->getName());
+                }
+            }
+
+            if ($victim instanceof Player && EnchantmentDisableManager::isEnchantmentDisabled($enchantmentId, $victim->getName())) {
+                $disabledUntil = EnchantmentDisableManager::getDisabledUntilTime($enchantmentId, $victim->getName());
+
+                if ($disabledUntil > time()) {
+                    continue;  
+                } else {
+                    EnchantmentDisableManager::removeDisableState($enchantmentId, $victim->getName());
+                }
+            }
+            
             if (!empty($levelConfig['conditions'])) {
                 foreach ($levelConfig['conditions'] as $condition) {
                     $target = $condition['target'] === 'victim' ? $victim : $attacker;
