@@ -30,7 +30,11 @@ class DisableActivationEffect implements EffectInterface {
         if (!isset($effectData['seconds'])) {
             $errorMessages[] = "Missing 'seconds' key under effect type '{$effectType}' in enchantment '{$enchantName}'.";
         }
-
+        
+        if (!isset($effectData['target'])) {
+            $errorMessages[] = "Missing 'target' key under effect type '{$effectType}' in enchantment '{$enchantName}'.";
+        }
+        
         if (!empty($errorMessages)) {
             $contextInfo = [
                 "effect" => $effectType,
