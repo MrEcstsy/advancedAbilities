@@ -3,9 +3,11 @@
 namespace ecstsy\advancedAbilities\effects;
 
 use ecstsy\advancedAbilities\utils\EffectInterface;
+use ecstsy\advancedAbilities\utils\Utils;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\entity\Entity;
 use pocketmine\entity\Living;
+use pocketmine\player\Player;
 use pocketmine\world\particle\BlockBreakParticle;
 
 class BloodEffect implements EffectInterface {
@@ -18,6 +20,35 @@ class BloodEffect implements EffectInterface {
             return;
         }
 
+        $effectType = $effectData['type'] ?? 'unknown';
+        $enchantName = $extraData['enchant-name'];
+        $errorMessages = [];
+        
+        if (!isset($effectData['target'])) {
+            $errorMessages[] = "Missing 'target' key under effect type '{$effectType}' in enchantment '{$enchantName}'.";
+        }
+
+        if (!empty($errorMessages)) {
+            $contextInfo = [
+                "effect" => $effectType,
+                'enchant-name' => $enchantName
+            ];
+
+            if ($attacker instanceof Player) {
+                foreach ($errorMessages as $message) {
+                    Utils::sendError($attacker, $message, $contextInfo);
+                }
+            }
+
+            if ($victim instanceof Player) {
+                foreach ($errorMessages as $message) {
+                    Utils::sendError($victim, $message, $contextInfo);
+                }
+            }
+
+            return;
+        }
+        
         $target->getWorld()->addParticle($target->getPosition()->asVector3(), new BlockBreakParticle(VanillaBlocks::REDSTONE()));
     }
 }
