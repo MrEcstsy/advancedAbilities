@@ -6,24 +6,57 @@ use ecstsy\advancedAbilities\utils\EffectInterface;
 use ecstsy\advancedAbilities\utils\Utils;
 use pocketmine\entity\Entity;
 use pocketmine\entity\Living;
+use pocketmine\player\Player;
 
 class StealHealthEffect implements EffectInterface {
 
     public function apply(Entity $attacker, ?Entity $victim, array $data, array $effectData, string $context, array $extraData): void
     {
-        if (!isset($effectData['amount']) || ($amount = Utils::parseRandomNumber($effectData['amount'])) <= 0) {
-            return; 
-        }
-
         $target = $effectData['target'] === 'victim' ? $victim : $attacker;
-    
+        
         if (!$target instanceof Living) {
             return; 
         }
+        
+        $effectType = $effectData['type'] ?? 'unknown';
+        $enchantName = $extraData['enchant-name'];
+        $errorMessages = [];
+        
+        if (!isset($effectData['amount'])) {
+            $errorMessages[] = "Missing 'amount' key under effect type '{$effectType}' in enchantment '{$enchantName}'.";
+        }
+
+        if (!isset($effectData['target'])) {
+            $errorMessages[] = "Missing 'target' key under effect type '{$effectType}' in enchantment '{$enchantName}'.";
+        }
+        
+        if (!empty($errorMessages)) {
+            $contextInfo = [
+                "effect" => $effectType,
+                'enchant-name' => $enchantName
+            ];
+
+            if ($attacker instanceof Player) {
+                foreach ($errorMessages as $message) {
+                    Utils::sendError($attacker, $message, $contextInfo);
+                }
+            }
+
+            if ($victim instanceof Player) {
+                foreach ($errorMessages as $message) {
+                    Utils::sendError($victim, $message, $contextInfo);
+                }
+            }
+
+            return;
+        }
+
+        $amount = Utils::parseRandomNumber($effectData['amount']);
 
         if ($victim !== null && $victim instanceof Living) {
             $currentVictimHealth = $victim->getHealth();
             $healthToSteal = min($amount, $currentVictimHealth); 
+
             $victim->setHealth($currentVictimHealth - $healthToSteal);
         } else {
             $healthToSteal = 0; 
@@ -32,6 +65,7 @@ class StealHealthEffect implements EffectInterface {
         $currentTargetHealth = $target->getHealth();
         $maxTargetHealth = $target->getMaxHealth();
         $newTargetHealth = min($maxTargetHealth, $currentTargetHealth + $healthToSteal); 
+
         $target->setHealth($newTargetHealth);
     }
 }
