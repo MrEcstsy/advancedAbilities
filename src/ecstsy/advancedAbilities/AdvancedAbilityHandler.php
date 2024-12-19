@@ -4,7 +4,14 @@ namespace ecstsy\advancedAbilities;
 
 use ecstsy\advancedAbilities\conditions\IsHoldingCondition;
 use ecstsy\advancedAbilities\conditions\IsSneakingCondition;
+use ecstsy\advancedAbilities\effects\ActionBarEffect;
+use ecstsy\advancedAbilities\effects\AddAirEffect;
+use ecstsy\advancedAbilities\effects\AddFoodEffect;
+use ecstsy\advancedAbilities\effects\AddHealthEffect;
 use ecstsy\advancedAbilities\effects\AddPotionEffect;
+use ecstsy\advancedAbilities\effects\BloodEffect;
+use ecstsy\advancedAbilities\effects\BurnEffect;
+use ecstsy\advancedAbilities\effects\DisableActivationEffect;
 use ecstsy\advancedAbilities\effects\StealHealthEffect;
 use ecstsy\advancedAbilities\listeners\TriggerListener;
 use ecstsy\advancedAbilities\triggers\AttackTrigger;
@@ -37,8 +44,15 @@ final class AdvancedAbilityHandler {
         ];
 
         $effects = [
-            'STEAL_HEALTH' => new StealHealthEffect(),
             'ADD_POTION' => new AddPotionEffect(),
+            'ACTION_BAR' => new ActionBarEffect(),
+            'ADD_AIR' => new AddAirEffect(),
+            'ADD_FOOD' => new AddFoodEffect(),
+            'ADD_HEALTH' => new AddHealthEffect(),
+            'BLOOD' => new BloodEffect(),
+            'BURN' => new BurnEffect(),
+            'DISABLE_ACTIVATION' => new DisableActivationEffect(),
+            'STEAL_HEALTH' => new StealHealthEffect(),
         ];
 
         $listeners = [
