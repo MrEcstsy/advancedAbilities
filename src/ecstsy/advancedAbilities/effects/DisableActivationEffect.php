@@ -7,21 +7,48 @@ use ecstsy\advancedAbilities\utils\managers\EnchantmentDisableManager;
 use ecstsy\advancedAbilities\utils\Utils;
 use pocketmine\entity\Entity;
 use pocketmine\entity\Living;
-use pocketmine\item\Item;
+use pocketmine\player\Player;
 
 class DisableActivationEffect implements EffectInterface {
-
-    private static $disabledActivation = [];
     
     public function apply(Entity $attacker, ?Entity $victim, array $data, array $effectData, string $context, array $extraData): void
     {
-        if (!isset($effectData['name']) || !isset($effectData['seconds'])) {
-            return;
-        }
-
         $target = $effectData['target'] === 'victim' ? $victim : $attacker;
 
         if (!$target instanceof Living) {
+            return;
+        }
+        
+        $effectType = $effectData['type'] ?? 'unknown';
+        $enchantName = $extraData['enchant-name'];
+        $errorMessages = [];
+        
+        if (!isset($effectData['name'])) {
+            $errorMessages[] = "Missing 'name' key under effect type '{$effectType}' in enchantment '{$enchantName}'.";
+        }
+
+        if (!isset($effectData['seconds'])) {
+            $errorMessages[] = "Missing 'seconds' key under effect type '{$effectType}' in enchantment '{$enchantName}'.";
+        }
+
+        if (!empty($errorMessages)) {
+            $contextInfo = [
+                "effect" => $effectType,
+                'enchant-name' => $enchantName
+            ];
+
+            if ($attacker instanceof Player) {
+                foreach ($errorMessages as $message) {
+                    Utils::sendError($attacker, $message, $contextInfo);
+                }
+            }
+
+            if ($victim instanceof Player) {
+                foreach ($errorMessages as $message) {
+                    Utils::sendError($victim, $message, $contextInfo);
+                }
+            }
+
             return;
         }
 
