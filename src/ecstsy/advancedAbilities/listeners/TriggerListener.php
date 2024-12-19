@@ -3,7 +3,6 @@
 namespace ecstsy\advancedAbilities\listeners;
 
 use ecstsy\advancedAbilities\AdvancedAbilityHandler;
-use ecstsy\advancedAbilities\triggers\DefenseTrigger;
 use ecstsy\advancedAbilities\triggers\GenericTrigger;
 use ecstsy\advancedAbilities\utils\TriggerHelper;
 use ecstsy\advancedAbilities\utils\Utils;
@@ -62,27 +61,30 @@ class TriggerListener implements Listener {
             return;
         }
     
-        $caster = $event->getEntity();
+        $victim = $event->getEntity();
         $attacker = $event->getDamager();
     
-        if (!$caster instanceof Living) {
+        if (!$victim instanceof Living) {
             return;
         }
     
-        $armorItems = $caster->getArmorInventory()->getContents();
-        $enchantmentsToApply = Utils::extractEnchantmentsFromItems($this->plugin, $armorItems);
+        $armorItems = $victim->getArmorInventory()->getContents();
+        $enchantments = Utils::extractEnchantmentsFromItems($this->plugin, $armorItems);
     
-        foreach ($enchantmentsToApply as &$enchantmentConfig) {
+        if (empty($enchantments)) {
+            return;
+        }
+        
+        foreach ($enchantments as &$enchantmentConfig) {
             $level = $enchantmentConfig['level'] ?? 1;
+            $chance = $enchantmentConfig['config']['levels'][$level]['chance'] ?? 100;
             if ($level !== null) {
-                $enchantmentConfig['enchant-level'] = $level;
+                $extraData = ['enchant-level' => $level, "chance" => $chance];
             }
         }
     
-        if (!empty($enchantmentsToApply)) {
-            $trigger = new DefenseTrigger();
-            $trigger->execute($attacker, $caster, $enchantmentsToApply, 'DEFENSE', ["enchant-level" => $level]);
-        }
+        $trigger = new GenericTrigger();
+        $trigger->execute($attacker, $victim, $enchantments, 'DEFENSE', $extraData);
     }
 
     public function onEntityDamage(EntityDamageEvent $event): void {
